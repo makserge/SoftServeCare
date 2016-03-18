@@ -87,12 +87,22 @@ public class FirebaseApi {
             if (snapshot.getChildren() != null) {
                 Map<String, ArrayList<SurveyQuestion>> questions = new HashMap<String, ArrayList<SurveyQuestion>>();
                 for (DataSnapshot item : snapshot.getChildren()) {
+                    String questionId = String.valueOf(item.child("id").getValue());
+                    String questionTitle = (String) item.child("title").getValue();
                     String surveyId = String.valueOf(item.child("survey_id").getValue());
                     ArrayList<SurveyQuestion> surveyQuestions = questions.get(surveyId);
                     if (surveyQuestions == null) {
                         surveyQuestions = new ArrayList<SurveyQuestion>();
                     }
-                    surveyQuestions.add(new SurveyQuestion(String.valueOf(item.child("id").getValue()), (String) item.child("title").getValue()));
+                    DataSnapshot answerItems = item.child("answers");
+                    List<SurveyAnswer> surveyAnswers = new ArrayList<SurveyAnswer>();
+                    if (surveyAnswers != null) {
+                        for (DataSnapshot answer : answerItems.getChildren()) {
+                            surveyAnswers.add(new SurveyAnswer(String.valueOf(answer.child("id").getValue()),
+                                    questionId, questionTitle, (String) answer.child("title").getValue()));
+                        }
+                    }
+                    surveyQuestions.add(new SurveyQuestion(questionId, questionTitle, surveyAnswers));
                     questions.put(surveyId, surveyQuestions);
                 }
                 if (questions.size() > 0)
