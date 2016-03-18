@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <stroke
+                android:width="1dp"
+                android:color="@color/surveyRowPressed"/>
+
+            <solid android:color="@color/surveyRowPressed"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <stroke
+                android:width="1dp"
+                android:color="@color/surveyRowDefault"/>
+
+            <solid android:color="@color/surveyRowDefault"/>
+
+        </shape>
+    </item>
+</selector>

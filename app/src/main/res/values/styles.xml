@@ -1,0 +1,41 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppThemeNoActionBar" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="SplashText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/font_huge</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ListTitleText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/surveyText</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="QuestionText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/surveyText</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AnswerText" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/surveyText</item>
+        <item name="android:textSize">@dimen/font_tiny</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
