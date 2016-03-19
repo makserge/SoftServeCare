@@ -3,7 +3,6 @@ package com.softserveinc.softservecare.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,10 @@ public class SurveyQuestion implements Parcelable {
 
     public String getTitle() {
         return mTitle;
+    }
+
+    public List<SurveyAnswer> getAnswers() {
+        return mAnswers;
     }
 
     @Override

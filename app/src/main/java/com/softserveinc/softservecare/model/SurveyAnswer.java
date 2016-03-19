@@ -1,9 +1,11 @@
 package com.softserveinc.softservecare.model;
 
+import java.io.Serializable;
+
 /**
  * Created by smakoh on 16.03.2016.
  */
-public class SurveyAnswer {
+public class SurveyAnswer implements Serializable {
     private String mId;
     private String mQuestionId;
     private String mTitle;

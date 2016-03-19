@@ -3,7 +3,6 @@ package com.softserveinc.softservecare.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +36,6 @@ public class Survey implements Parcelable {
         return mQuestions;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -45,16 +43,15 @@ public class Survey implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
-        dest.writeString(mTitle);
-        dest.writeList(mQuestions);
+        dest.writeString(this.mId);
+        dest.writeString(this.mTitle);
+        dest.writeTypedList(mQuestions);
     }
 
     protected Survey(Parcel in) {
-        mId = in.readString();
-        mTitle = in.readString();
-        mQuestions = new ArrayList<SurveyQuestion>();
-        in.readList(mQuestions, SurveyQuestion.class.getClassLoader());
+        this.mId = in.readString();
+        this.mTitle = in.readString();
+        this.mQuestions = in.createTypedArrayList(SurveyQuestion.CREATOR);
     }
 
     public static final Creator<Survey> CREATOR = new Creator<Survey>() {

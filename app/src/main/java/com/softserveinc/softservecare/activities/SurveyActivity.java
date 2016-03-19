@@ -6,10 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.softserveinc.softservecare.R;
 import com.softserveinc.softservecare.SoftServeCareApplication;
 import com.softserveinc.softservecare.adapters.SurveyQuestionsAdapter;
@@ -78,7 +76,7 @@ public class SurveyActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        SurveyQuestionsAdapter adapter = new SurveyQuestionsAdapter(mAnswers);
+        SurveyQuestionsAdapter adapter = new SurveyQuestionsAdapter(this, mAnswers);
         recyclerView.setAdapter(adapter);
         adapter.updateItems(questions, answers);
     }
