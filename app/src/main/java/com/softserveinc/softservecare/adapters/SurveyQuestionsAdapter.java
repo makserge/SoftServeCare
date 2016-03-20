@@ -99,7 +99,7 @@ public class SurveyQuestionsAdapter extends RecyclerView.Adapter<SurveyQuestions
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         int checkedRadioButtonId = holder.mAnswerRadioGroup.getCheckedRadioButtonId();
                         RadioButton radioBtn = (RadioButton) ((Activity) mContext).findViewById(checkedRadioButtonId);
-                        mAnswersFilled.put(question.getId(), new SurveyAnswer(String.valueOf(position), questionId, questionTitle, radioBtn.getText().toString()));
+                        mAnswersFilled.put(question.getId(), new SurveyAnswer(String.valueOf(radioBtn.getId()), questionId, questionTitle, radioBtn.getText().toString()));
                     }
                 });
             }
