@@ -2,9 +2,9 @@ package com.softserveinc.softservecare.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +14,8 @@ import com.firebase.client.FirebaseError;
 import com.softserveinc.softservecare.Constants;
 import com.softserveinc.softservecare.R;
 
+import java.util.Map;
+
 public class SignUpActivity extends AppCompatActivity {
 
     @Override
@@ -21,31 +23,43 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        final EditText passwordEditText = (EditText) findViewById(R.id.passwordField);
-        final EditText emailEditText = (EditText)findViewById(R.id.emailField);
-        Button signUpButton = (Button)findViewById(R.id.signupButton);
+        final EditText firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
+        final EditText lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);
+        final EditText emailEditText = (EditText) findViewById(R.id.emailEditText);
+        final EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
-        final Firebase ref = new Firebase(Constants.FIREBASE_URL);
+        Button signUpButton = (Button) findViewById(R.id.signupButton);
+
+        final Firebase firebase = new Firebase(Constants.FIREBASE_URL);
 
         if (signUpButton != null) {
             signUpButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    final String firstName = firstNameEditText.getText().toString().trim();
+                    final String lastName = lastNameEditText.getText().toString().trim();
                     final String password = passwordEditText.getText().toString().trim();
                     final String email = emailEditText.getText().toString().trim();
 
-                    if (password.isEmpty() || email.isEmpty()) {
+                    if (firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || email.isEmpty()) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                         builder.setMessage(R.string.signup_error_message)
                                 .setTitle(R.string.signup_error_title)
                                 .setPositiveButton(android.R.string.ok, null);
                         AlertDialog dialog = builder.create();
                         dialog.show();
-                    }
-                    else {
-                        ref.createUser(email, password, new Firebase.ResultHandler() {
+                    } else {
+                        firebase.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                             @Override
-                            public void onSuccess() {
+                            public void onSuccess(Map<String, Object> result) {
+                                String userId = result.get("uid").toString();
+
+                                Firebase user = firebase.child("users").child(userId);
+                                user.child("id").setValue(userId);
+
+                                user.child("first_name").setValue(firstName);
+                                user.child("last_name").setValue(lastName);
+
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                 builder.setMessage(R.string.signup_success)
                                         .setPositiveButton(R.string.login_button_label, new DialogInterface.OnClickListener() {

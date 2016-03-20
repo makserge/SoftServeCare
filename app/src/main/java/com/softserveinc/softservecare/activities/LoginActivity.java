@@ -1,9 +1,9 @@
 package com.softserveinc.softservecare.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +15,6 @@ import com.softserveinc.softservecare.Constants;
 import com.softserveinc.softservecare.R;
 import com.softserveinc.softservecare.api.FirebaseApi;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -25,12 +22,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText emailEditText = (EditText) findViewById(R.id.emailField);
-        final EditText passwordEditText = (EditText) findViewById(R.id.passwordField);
+        final EditText emailEditText = (EditText) findViewById(R.id.emailEditText);
+        final EditText passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button signUpButton = (Button) findViewById(R.id.signUpButton);
 
-        final Firebase ref = new Firebase(Constants.FIREBASE_URL);
+        final Firebase firebase = new Firebase(Constants.FIREBASE_URL);
 
         if (signUpButton != null) {
             signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -58,14 +55,13 @@ public class LoginActivity extends AppCompatActivity {
                         dialog.show();
                     }
                     else {
-                        ref.authWithPassword(email, password, new Firebase.AuthResultHandler() {
+                        firebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
                                 FirebaseApi.getInstance().initFirebase();
 
-                                Map<String, Object> map = new HashMap<String, Object>();
-                                map.put("email", email);
-                                ref.child("users").child(authData.getUid()).setValue(map);
+                                Firebase user = firebase.child("users").child(authData.getUid());
+                                user.child("email").setValue(email);
 
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
