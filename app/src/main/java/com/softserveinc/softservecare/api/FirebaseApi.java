@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TimeZone;
 
 /**
@@ -212,7 +211,7 @@ public class FirebaseApi {
         for (SurveyAnswer item: answers.values()) {
             Map<String, String> data = new HashMap<String, String>();
 
-            data.put("id", idOffset + item.getId());
+            data.put("answer_id", item.getId());
             data.put("date", dateTimeISO);
             data.put("survey_id", surveyId);
             data.put("question_id", item.getQuestionId());
