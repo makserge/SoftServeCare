@@ -15,9 +15,6 @@ import com.softserveinc.softservecare.adapters.SurveysAdapter;
 import com.softserveinc.softservecare.api.FirebaseApi;
 import com.softserveinc.softservecare.interfaces.SurveysItemClickListener;
 import com.softserveinc.softservecare.model.Survey;
-import com.softserveinc.softservecare.model.SurveyAnswer;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements SurveysItemClickListener {
 
@@ -30,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements SurveysItemClickL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        checkLogin();
-
         setupListView();
     }
 
@@ -40,12 +35,6 @@ public class MainActivity extends AppCompatActivity implements SurveysItemClickL
         super.onResume();
 
         mAdapter.updateItems(FirebaseApi.getInstance().getSurveys());
-    }
-
-    private void checkLogin() {
-        if (FirebaseApi.getInstance().checkLogin()) {
-            loadLoginView();
-        }
     }
 
     @Override

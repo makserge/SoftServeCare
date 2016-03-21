@@ -21,6 +21,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="survey"
+                    android:scheme="softservecare" />
+
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.MainActivity"
@@ -42,6 +53,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.softserveinc.softservecare.activities.MainActivity" />
+
         </activity>
     </application>
 

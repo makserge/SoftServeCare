@@ -1,0 +1,1 @@
+C:\Users\smakoh\AppData\Local\Android\sdk\platform-tools\adb shell am start -W -a android.intent.action.VIEW -d "softservecare://survey/0" com.softserveinc.softservecare

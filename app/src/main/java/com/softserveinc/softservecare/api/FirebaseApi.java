@@ -164,7 +164,7 @@ public class FirebaseApi {
         return mSurveys;
     }
 
-    private Survey findSurveyById(String surveyId) {
+    public Survey findSurveyById(String surveyId) {
         for (Survey item : mSurveys) {
             if (surveyId.equals(item.getId())) {
                 return item;
