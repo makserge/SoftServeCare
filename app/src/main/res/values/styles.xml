@@ -29,6 +29,7 @@
     </style>
 
     <style name="AnswerText" parent="android:Widget.TextView">
+        <item name="android:paddingTop">20dp</item>
         <item name="android:textColor">@color/surveyText</item>
         <item name="android:textSize">@dimen/font_tiny</item>
         <item name="android:background">@android:color/transparent</item>
