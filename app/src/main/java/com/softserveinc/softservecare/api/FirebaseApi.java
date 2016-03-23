@@ -128,7 +128,7 @@ public class FirebaseApi {
                 String userId = getUserId();
                 if (userId != null) {
                     for (DataSnapshot item : snapshot.getChildren()) {
-                        if (userId.equals((String) item.child("user_id").getValue())) {
+                        if (userId.equals(item.child("user_id").getValue())) {
                             String surveyId = (String) item.child("survey_id").getValue();
 
                             HashMap<String, SurveyAnswer> answers = mSurveyAnswers.get(surveyId);

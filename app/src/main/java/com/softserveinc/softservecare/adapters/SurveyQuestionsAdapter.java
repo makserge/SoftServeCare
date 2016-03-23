@@ -97,8 +97,7 @@ public class SurveyQuestionsAdapter extends RecyclerView.Adapter<SurveyQuestions
                 holder.mAnswerRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        int checkedRadioButtonId = holder.mAnswerRadioGroup.getCheckedRadioButtonId();
-                        RadioButton radioBtn = (RadioButton) ((Activity) mContext).findViewById(checkedRadioButtonId);
+                        RadioButton radioBtn = (RadioButton) group.getChildAt(checkedId);
                         mAnswersFilled.put(question.getId(), new SurveyAnswer(String.valueOf(radioBtn.getId()), questionId, questionTitle, radioBtn.getText().toString()));
                     }
                 });
